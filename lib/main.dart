@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 void main(){
   runApp(MyApp());
@@ -9,13 +10,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: "Hellix"),
-      // initialRoute: ,
-      routes: {
-        
-      },
+    return Sizer(
+      builder: (context,_,__) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: "Hellix"),
+          // initialRoute: ,
+          routes: {
+            
+          },
+        );
+      }
     );
   }
 }
