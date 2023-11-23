@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzy/pages/onboarding_reseau_social.dart';
+import 'package:friendzy/pages/onboarding/onboarding_reseau_social.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';

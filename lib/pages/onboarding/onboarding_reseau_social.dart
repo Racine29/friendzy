@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/pages/inscription-via-numero-telephone/entrer_numero_de_telephone.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
@@ -37,6 +38,10 @@ class OnboardingReseauSocial extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: h40px),
             child: ElevatedBtnAvecIcone(
                 texte: "Login with Phone",
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EntrerNumeroDeTelephone())),
                 couleurDubutton: couleurPrincipal,
                 icone: const Icon(
                   Iconsax.call,
