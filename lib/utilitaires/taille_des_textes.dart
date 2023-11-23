@@ -41,6 +41,11 @@ class TailleDuText {
         fontSize: s24px,
         fontWeight: PoidsDeLaPolice.demiGras,
       );
+  static TextStyle texte24Gras(Color color) => TextStyle(
+        color: color,
+        fontSize: s24px,
+        fontWeight: PoidsDeLaPolice.gras,
+      );
 
   static TextStyle texte28Gras(Color color) => TextStyle(
         color: color,
