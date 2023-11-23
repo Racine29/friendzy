@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:friendzy/pages/onboarding.dart';
-import 'package:friendzy/pages/onboarding_reseau_social.dart';
+import 'package:friendzy/pages/inscription-via-numero-telephone/entrer_numero_de_telephone.dart';
+import 'package:friendzy/pages/onboarding/onboarding.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
