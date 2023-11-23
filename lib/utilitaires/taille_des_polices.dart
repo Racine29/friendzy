@@ -15,6 +15,11 @@ double h12px = 1.8.h;
 double h14px = 2.h;
 double h22px = 3.2.h;
 double h30px = 4.2.h;
+double h45px = 6.3.h;
+double h40px = 6.h;
+double h60px = 8.4.h;
+double h70px = 9.8.h;
+double h80px = 10.4.h;
 
 double s37px = 31.sp;
 double s32px = 27.sp;

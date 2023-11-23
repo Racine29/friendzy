@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/pages/onboarding_reseau_social.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
@@ -41,13 +42,16 @@ class Onboarding extends StatelessWidget {
             height: h22px,
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: h40px),
               child: ElevatedBtn(
                   texte: "Continue",
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OnboardingReseauSocial())),
                   style: TailleDuText.texte16Gras(texteCouleurBlanc))),
-          const SizedBox(
-            height: 100,
+          SizedBox(
+            height: h70px,
           ),
         ],
       ),

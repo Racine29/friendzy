@@ -29,7 +29,11 @@ class ElevatedBtnAvecIcone extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            icone ?? const SizedBox(),
+            CircleAvatar(
+                    maxRadius: 24,
+                    backgroundColor: Colors.white,
+                    child: icone) ??
+                const SizedBox(),
             Text(
               texte,
               style: style,

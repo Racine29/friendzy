@@ -34,17 +34,13 @@ class OnboardingReseauSocial extends StatelessWidget {
             height: h22px,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: h40px),
             child: ElevatedBtnAvecIcone(
                 texte: "Login with Phone",
                 couleurDubutton: couleurPrincipal,
-                icone: const CircleAvatar(
-                  maxRadius: 24,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Iconsax.call,
-                    color: texteCouleurNoir,
-                  ),
+                icone: const Icon(
+                  Iconsax.call,
+                  color: texteCouleurNoir,
                 ),
                 style: TailleDuText.texte16Gras(texteCouleurBlanc)),
           ),
@@ -52,17 +48,13 @@ class OnboardingReseauSocial extends StatelessWidget {
             height: h14px,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: h40px),
             child: ElevatedBtnAvecIcone(
                 texte: "Login with Google",
                 couleurDubutton: couleurTertiaire,
-                icone: CircleAvatar(
-                  maxRadius: 24,
-                  backgroundColor: Colors.white,
-                  child: Image.asset(
-                    "assets/images/google-icon.png",
-                    height: 22,
-                  ),
+                icone: Image.asset(
+                  "assets/images/google-icon.png",
+                  height: 22,
                 ),
                 style: TailleDuText.texte16Gras(texteCouleurNoir)),
           ),
@@ -73,7 +65,7 @@ class OnboardingReseauSocial extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't have an account? ",
+                "Don't have an account ? ",
                 textAlign: TextAlign.center,
                 style: TailleDuText.texte16Normal(texteCouleurNoir),
               ),
