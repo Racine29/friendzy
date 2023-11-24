@@ -47,7 +47,8 @@ class FormulaireNumeroDeTelephone extends StatelessWidget {
         errorBorder: bordureDuChampFormulaire(
           color: Colors.red,
         ),
-        filled: false,
+        filled: true,
+        fillColor: Colors.white,
       ),
       initialCountryCode: initialCountryCode,
       onSubmitted: (phone) {},

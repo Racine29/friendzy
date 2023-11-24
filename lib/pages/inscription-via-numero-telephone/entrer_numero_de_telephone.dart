@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/pages/inscription-via-numero-telephone/entrer_code_de_confirmation_numero_de_telephone.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
@@ -77,7 +78,11 @@ class _EntrerNumeroDeTelephoneState extends State<EntrerNumeroDeTelephone> {
             ),
             const Spacer(),
             ElevatedBtn(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            EntrerConfirmationDeCodeDuNumeroDeTelephone())),
                 texte: "Continue",
                 style: TailleDuText.texte16DemiGras(texteCouleurBlanc)),
             SizedBox(height: h40px),
