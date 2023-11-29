@@ -42,7 +42,7 @@ class Onboarding extends StatelessWidget {
             height: h22px,
           ),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: h40px),
+              padding: EdgeInsets.symmetric(horizontal: h20px),
               child: ElevatedBtn(
                   texte: "Continue",
                   onPressed: () => Navigator.push(
