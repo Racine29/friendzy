@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzy/pages/inscription-via-numero-telephone/entrer_numero_de_telephone.dart';
+import 'package:friendzy/pages/inscription/via-numero-telephone/entrer_numero_de_telephone.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
@@ -35,7 +35,7 @@ class OnboardingReseauSocial extends StatelessWidget {
             height: h22px,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: h40px),
+            padding: EdgeInsets.symmetric(horizontal: h20px),
             child: ElevatedBtnAvecIcone(
                 texte: "Login with Phone",
                 onPressed: () => Navigator.push(
@@ -53,7 +53,7 @@ class OnboardingReseauSocial extends StatelessWidget {
             height: h14px,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: h40px),
+            padding: EdgeInsets.symmetric(horizontal: h20px),
             child: ElevatedBtnAvecIcone(
                 texte: "Login with Google",
                 couleurDubutton: couleurTertiaire,

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/pages/inscription/etape/etape_acceuil.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
+import 'package:friendzy/widget/barreDapplication.dart';
 import 'package:friendzy/widget/elevatedBtn.dart';
-import 'package:friendzy/widget/formulaire_numero_de_telephone.dart';
 import 'package:friendzy/widget/formulaire_verification_de_telephone.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:pinput/pinput.dart';
 
 class EntrerConfirmationDeCodeDuNumeroDeTelephone extends StatefulWidget {
   const EntrerConfirmationDeCodeDuNumeroDeTelephone({super.key});
-  static String page = "entrer-numero-de-telephone";
+  static String page = "entrer-code-de-confirmation-numero-de-telephone";
 
   @override
   State<EntrerConfirmationDeCodeDuNumeroDeTelephone> createState() =>
@@ -25,30 +24,10 @@ class _EntrerConfirmationDeCodeDuNumeroDeTelephone
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: Center(
-          child: SizedBox(
-            width: h40px,
-            height: h40px,
-            child: OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                        side: const BorderSide(color: couleurPrincipal))),
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: texteCouleurNoir,
-                  size: h20px,
-                )),
-          ),
-        ),
-        backgroundColor: couleurArrierePlan,
-      ),
+      appBar: BarreDapplication(),
       backgroundColor: couleurArrierePlan,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: h40px),
+        padding: EdgeInsets.symmetric(horizontal: h20px),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -96,8 +75,8 @@ class _EntrerConfirmationDeCodeDuNumeroDeTelephone
             SizedBox(height: h40px),
             FormulaireVerificationDuNumeroDeTelephone(),
             SizedBox(height: h40px),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              alignment: WrapAlignment.center,
               children: [
                 Text(
                   "Don't have an account ? ",
@@ -116,9 +95,10 @@ class _EntrerConfirmationDeCodeDuNumeroDeTelephone
             ),
             const Spacer(),
             ElevatedBtn(
-                onPressed: () {},
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EtapeAccueil())),
                 texte: "Verify",
-                style: TailleDuText.texte16DemiGras(texteCouleurBlanc)),
+                style: TailleDuText.texte16Gras(texteCouleurBlanc)),
             SizedBox(height: h40px),
           ],
         ),
