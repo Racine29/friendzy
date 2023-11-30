@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
+import 'package:friendzy/pages/inscription/etape/centre_dinteret.dart';
+import 'package:friendzy/pages/inscription/etape/nom.dart';
+import 'package:friendzy/pages/inscription/etape/photo.dart';
+import 'package:friendzy/pages/inscription/etape/sexe.dart';
+import 'package:friendzy/pages/inscription/via-numero-telephone/entrer_code_de_confirmation_numero_de_telephone.dart';
+import 'package:friendzy/pages/inscription/via-numero-telephone/entrer_numero_de_telephone.dart';
 import 'package:friendzy/pages/onboarding/onboarding.dart';
+import 'package:friendzy/pages/onboarding/onboarding_reseau_social.dart';
 import 'package:sizer/sizer.dart';
 import "package:provider/provider.dart";
 
@@ -22,7 +29,20 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(fontFamily: "Hellix"),
-            home: Onboarding(),
+            initialRoute: Onboarding.page,
+            routes: {
+              Onboarding.page: (context) => Onboarding(),
+              OnboardingReseauSocial.page: (context) =>
+                  OnboardingReseauSocial(),
+              EntrerNumeroDeTelephone.page: (context) =>
+                  EntrerNumeroDeTelephone(),
+              EntrerConfirmationDeCodeDuNumeroDeTelephone.page: (context) =>
+                  EntrerConfirmationDeCodeDuNumeroDeTelephone(),
+              EntrerNom.page: (context) => EntrerNom(),
+              EntrerSexe.page: (context) => EntrerSexe(),
+              EntrerPhoto.page: (context) => EntrerPhoto(),
+              CentreDinteret.page: (context) => CentreDinteret(),
+            },
           );
         });
       },
