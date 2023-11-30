@@ -6,7 +6,7 @@ import 'package:friendzy/widget/bordure_du_champ_formulaire.dart';
 
 class EntrerNom extends StatelessWidget {
   const EntrerNom({super.key});
-
+  static String page = "entrer-nom";
   @override
   Widget build(BuildContext context) {
     return Column(

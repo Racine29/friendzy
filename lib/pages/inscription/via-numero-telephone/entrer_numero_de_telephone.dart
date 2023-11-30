@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzy/pages/inscription/via-numero-telephone/entrer_code_de_confirmation_numero_de_telephone.dart';
+import 'package:friendzy/services/service_dauthentification.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
@@ -58,11 +60,24 @@ class _EntrerNumeroDeTelephoneState extends State<EntrerNumeroDeTelephone> {
             ),
             const Spacer(),
             ElevatedBtn(
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            EntrerConfirmationDeCodeDuNumeroDeTelephone())),
+                onPressed: () async {
+                  final service = ServicesDauthentifications();
+                  await service.authentification.verifyPhoneNumber(
+                      phoneNumber: numeroDeTelephone,
+                      verificationCompleted: (_) {},
+                      verificationFailed: (FirebaseAuthException error) {
+                        setState(() {
+                          // _isLoading = false;
+                          // _smsCodeError =
+                          //     _authenticationServices.getErrors(error);
+                        });
+                      },
+                      codeSent: ((verificationId, forceResendingToken) async {
+                        // await _presentPhoneNumberConfirmationScreen(
+                        //     verificationId);
+                      }),
+                      codeAutoRetrievalTimeout: (_) {});
+                },
                 texte: "Continue",
                 style: TailleDuText.texte16Gras(texteCouleurBlanc)),
             SizedBox(height: h40px),

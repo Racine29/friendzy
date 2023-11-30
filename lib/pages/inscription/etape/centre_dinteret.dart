@@ -3,11 +3,11 @@ import 'package:friendzy/modeles/centre_dinteret_model.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
-import 'package:friendzy/widget/bordure_du_champ_formulaire.dart';
-import 'package:friendzy/widget/sexe_carte.dart';
 
 class CentreDinteret extends StatefulWidget {
   const CentreDinteret({super.key});
+  static String page = "entrer-centre-interet";
+
   @override
   State<CentreDinteret> createState() => _CentreDinteretState();
 }

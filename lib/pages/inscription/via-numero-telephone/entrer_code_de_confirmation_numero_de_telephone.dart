@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzy/pages/inscription/etape/etape_acceuil.dart';
+import 'package:friendzy/pages/inscription/etape/etape_accueil.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';

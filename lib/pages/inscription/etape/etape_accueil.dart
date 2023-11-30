@@ -3,7 +3,6 @@ import 'package:friendzy/pages/inscription/etape/centre_dinteret.dart';
 import 'package:friendzy/pages/inscription/etape/nom.dart';
 import 'package:friendzy/pages/inscription/etape/photo.dart';
 import 'package:friendzy/pages/inscription/etape/sexe.dart';
-import 'package:friendzy/pages/inscription/via-numero-telephone/entrer_code_de_confirmation_numero_de_telephone.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
@@ -23,7 +22,7 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
     EntrerNom(),
     EntrerSexe(),
     CentreDinteret(),
-    Photo(),
+    EntrerPhoto(),
   ];
   int index = 0;
   @override
