@@ -40,16 +40,15 @@ dependencies:
   pinput: ^3.0.1
   flutter_native_splash: ^2.3.6
   flutter_launcher_icons: ^0.13.1
+  firebase_core: ^2.24.0
 
 flutter_native_splash:
-  # color: "#DD88CF"
   background_image: "assets/images/ecranDaffichageFondDecran.png"
   image: assets/images/ecran-logo.png
 
   android_12:
     background_image: "assets/images/ecranDaffichageFondDecran.png"
     image: assets/images/ecran-logo.png
-    # color: "#DD88CF"
 
   android: true
   ios: true
