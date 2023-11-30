@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
-import 'package:friendzy/widget/bordure_du_champ_formulaire.dart';
 import 'package:friendzy/widget/sexe_carte.dart';
 
 class EntrerSexe extends StatefulWidget {
   const EntrerSexe({super.key});
+  static String page = "entrer-sexe";
   @override
   State<EntrerSexe> createState() => _EntrerSexeState();
 }

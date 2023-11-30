@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
-import 'package:friendzy/widget/elevatedBtn.dart';
 import 'package:friendzy/widget/photo_carte.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../utilitaires/couleurs.dart';
 
-class Photo extends StatelessWidget {
-  const Photo({super.key});
+class EntrerPhoto extends StatelessWidget {
+  const EntrerPhoto({super.key});
+  static String page = "entrer-photo";
 
   @override
   Widget build(BuildContext context) {
