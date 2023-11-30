@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzy/models/centre_dinteret_model.dart';
+import 'package:friendzy/modeles/centre_dinteret_model.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';

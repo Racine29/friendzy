@@ -1,4 +1,4 @@
-import 'package:friendzy/models/centre_dinteret_model.dart';
+import 'package:friendzy/modeles/centre_dinteret_model.dart';
 
 class UtilisateurModel {
   final String? nom;
