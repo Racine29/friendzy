@@ -38,10 +38,9 @@ class OnboardingReseauSocial extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: h20px),
             child: ElevatedBtnAvecIcone(
                 texte: "Login with Phone",
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EntrerNumeroDeTelephone())),
+                onPressed: () {
+                  Navigator.pushNamed(context, EntrerNumeroDeTelephone.page);
+                },
                 couleurDubutton: couleurPrincipal,
                 icone: const Icon(
                   Iconsax.call,
@@ -65,24 +64,6 @@ class OnboardingReseauSocial extends StatelessWidget {
           ),
           SizedBox(
             height: h22px,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don't have an account ? ",
-                textAlign: TextAlign.center,
-                style: TailleDuText.texte16Normal(texteCouleurNoir),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  "Sign Up",
-                  textAlign: TextAlign.center,
-                  style: TailleDuText.texte16DemiGras(couleurSecondaire),
-                ),
-              ),
-            ],
           ),
           SizedBox(
             height: h30px + 10,
