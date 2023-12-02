@@ -4,7 +4,6 @@ import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
 import 'package:friendzy/widget/elevatedBtn.dart';
-import 'package:sizer/sizer.dart';
 
 class Onboarding extends StatelessWidget {
   const Onboarding({super.key});
@@ -45,10 +44,9 @@ class Onboarding extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: h20px),
               child: ElevatedBtn(
                   texte: "Continue",
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OnboardingReseauSocial())),
+                  onPressed: () {
+                    Navigator.pushNamed(context, OnboardingReseauSocial.page);
+                  },
                   style: TailleDuText.texte16Gras(texteCouleurBlanc))),
           SizedBox(
             height: h70px,
