@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
+import 'package:friendzy/modeles/utilisateur_modele.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
 import 'package:friendzy/widget/bordure_du_champ_formulaire.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 
 class EntrerNom extends StatelessWidget {
-  const EntrerNom({super.key});
+  EntrerNom({super.key});
   static String page = "entrer-nom";
+  final stockage = GetStorage();
+
   @override
   Widget build(BuildContext context) {
+    final fournisseur =
+        Provider.of<UtilisateurFournisseur>(context, listen: true);
+
     return Column(
       children: [
         SizedBox(
@@ -23,6 +32,15 @@ class EntrerNom extends StatelessWidget {
           height: h30px,
         ),
         TextFormField(
+          validator: (valeur) {
+            return valeur!.isEmpty ? "Champ vide." : null;
+          },
+          onChanged: (valeur) {
+            fournisseur.completerLesDonnees({
+              "nom": valeur,
+            });
+          },
+          initialValue: fournisseur.donnees["nom"],
           cursorColor: couleurPrincipal,
           decoration: InputDecoration(
             contentPadding:
@@ -37,7 +55,7 @@ class EntrerNom extends StatelessWidget {
             filled: true,
             fillColor: texteCouleurBlanc,
           ),
-        )
+        ),
       ],
     );
   }
