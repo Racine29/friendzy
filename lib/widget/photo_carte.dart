@@ -1,28 +1,38 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
 import 'package:friendzy/widget/elevatedBtn.dart';
 
 class PhotoCarte extends StatelessWidget {
-  const PhotoCarte(
-      {super.key,
-      required this.taille,
-      required this.largeur,
-      required this.hauteur,
-      required this.tailleDeMonEmoji,
-      required this.hauteurDuButton,
-      this.photoExiste = false});
+  const PhotoCarte({
+    super.key,
+    required this.taille,
+    required this.largeur,
+    required this.hauteur,
+    required this.tailleDeMonEmoji,
+    required this.hauteurDuButton,
+    this.surClique,
+    this.photoExiste = false,
+    this.fichier,
+    this.changerTexteDuButton = false,
+  });
   final Size taille;
   final double largeur;
   final double hauteur;
   final double tailleDeMonEmoji;
   final double hauteurDuButton;
   final bool photoExiste;
-
+  final VoidCallback? surClique;
+  final XFile? fichier;
+  final bool changerTexteDuButton;
   @override
   Widget build(BuildContext context) {
-    double largeurDeMonButton = photoExiste ? h100px + 50 : h80px;
+    double largeurDeMonButton =
+        fichier != null && changerTexteDuButton ? h100px + 50 : h80px;
     return Container(
       width: largeur,
       height: hauteur,
@@ -42,18 +52,26 @@ class PhotoCarte extends StatelessWidget {
               color: couleurSecondaire.withOpacity(.1),
             ),
           ),
-          photoExiste
+          fichier != null
               ? Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(h20px),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withOpacity(0),
-                          Colors.black.withOpacity(.2),
-                        ],
-                      )),
+                    borderRadius: BorderRadius.circular(h20px),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withOpacity(0.2),
+                        Colors.black.withOpacity(.4),
+                      ],
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(h20px),
+                    child: Image.file(
+                      File(fichier!.path),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 )
               : const SizedBox(),
           Positioned(
@@ -62,17 +80,19 @@ class PhotoCarte extends StatelessWidget {
             width: largeurDeMonButton,
             height: hauteurDuButton,
             child: ElevatedBtn(
-              onPressed: photoExiste ? () {} : () {},
-              couleurDubutton: photoExiste
+              onPressed: surClique,
+              couleurDubutton: fichier != null && changerTexteDuButton
                   ? Colors.white.withOpacity(.3)
                   : couleurSecondaire,
               rembourage: EdgeInsets.zero,
               style: TailleDuText.texte16Normal(texteCouleurBlanc),
-              enfant: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              enfant: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Icon(
-                    photoExiste ? Icons.camera_alt_rounded : Icons.add_rounded,
+                    fichier != null
+                        ? Icons.camera_alt_rounded
+                        : Icons.add_rounded,
                     size: h16px,
                     color: Colors.white,
                   ),
@@ -80,7 +100,9 @@ class PhotoCarte extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    photoExiste ? "Change Photo" : "Add",
+                    fichier != null && changerTexteDuButton
+                        ? "Change Photo"
+                        : "Add",
                     style: TailleDuText.texte16DemiGras(texteCouleurBlanc),
                   )
                 ],
