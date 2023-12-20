@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
-import 'package:friendzy/modeles/utilisateur_modele.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
