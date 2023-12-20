@@ -18,8 +18,9 @@ class ElevatedBtnAvecIcone extends StatelessWidget {
   final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onPressed,
+      borderRadius: BorderRadius.circular(100),
       child: Container(
         padding: EdgeInsets.all(h8px),
         decoration: BoxDecoration(
@@ -29,11 +30,10 @@ class ElevatedBtnAvecIcone extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
-                    maxRadius: 24,
-                    backgroundColor: Colors.white,
-                    child: icone) ??
-                const SizedBox(),
+            icone != null
+                ? CircleAvatar(
+                    maxRadius: 24, backgroundColor: Colors.white, child: icone)
+                : const SizedBox(),
             Text(
               texte,
               style: style,
