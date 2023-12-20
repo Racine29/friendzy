@@ -6,12 +6,15 @@ import "package:pinput/pinput.dart";
 
 class FormulaireVerificationDuNumeroDeTelephone extends StatelessWidget {
   Function(String)? onChanged;
-  FormulaireVerificationDuNumeroDeTelephone({this.onChanged});
+  TextEditingController? controlleurDeTexte;
+  FormulaireVerificationDuNumeroDeTelephone(
+      {this.onChanged, this.controlleurDeTexte});
 
   @override
   Widget build(BuildContext context) {
     return Pinput(
       length: 6,
+      controller: controlleurDeTexte,
       focusedPinTheme: PinTheme(
           height: h70px,
           textStyle: TailleDuText.texte16DemiGras(texteCouleurNoir),
