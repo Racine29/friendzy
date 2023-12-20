@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
 import 'package:friendzy/widget/sexe_carte.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 
 class EntrerSexe extends StatefulWidget {
   const EntrerSexe({super.key});
@@ -15,9 +18,34 @@ class _EntrerSexeState extends State<EntrerSexe> {
   bool estUnHomme = false;
   bool estUneFemme = false;
 
+  final stockage = GetStorage();
+
+  changerLetatDuSexe(bool femme, bool homme) {
+    setState(() {
+      estUnHomme = homme;
+      estUneFemme = femme;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    final fournisseur =
+        Provider.of<UtilisateurFournisseur>(context, listen: false);
+
+    if (fournisseur.donnees["genre"] == 'Homme') {
+      changerLetatDuSexe(false, true);
+    } else if (fournisseur.donnees["genre"] == 'Femme') {
+      changerLetatDuSexe(true, false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final taille = MediaQuery.of(context).size;
+    final fournisseur =
+        Provider.of<UtilisateurFournisseur>(context, listen: true);
     return Column(
       children: [
         SizedBox(
@@ -36,9 +64,10 @@ class _EntrerSexeState extends State<EntrerSexe> {
           children: [
             GestureDetector(
               onTap: () {
-                setState(() {});
                 estUnHomme = true;
                 estUneFemme = false;
+                fournisseur.completerLesDonnees({"genre": "Homme"});
+                setState(() {});
               },
               child: SexeCarte(
                 taille: taille,
@@ -57,9 +86,10 @@ class _EntrerSexeState extends State<EntrerSexe> {
             ),
             GestureDetector(
               onTap: () {
-                setState(() {});
                 estUneFemme = true;
                 estUnHomme = false;
+                fournisseur.completerLesDonnees({"genre": "Femme"});
+                setState(() {});
               },
               child: SexeCarte(
                 taille: taille,
