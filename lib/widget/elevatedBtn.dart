@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
-import 'package:friendzy/utilitaires/taille_des_textes.dart';
 
 class ElevatedBtn extends StatelessWidget {
   const ElevatedBtn(
