@@ -69,7 +69,7 @@ class _EntrerNumeroDeTelephoneState extends State<EntrerNumeroDeTelephone> {
                 onPressed: !numeroEstCorrect
                     ? null
                     : () async {
-                        FocusNode().unfocus();
+                        FocusScope.of(context).unfocus();
                         final service = ServicesDauthentifications();
                         Chargement(context);
                         await service.authentification.verifyPhoneNumber(
