@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:friendzy/modeles/centre_dinteret_modele.dart';
 import 'package:friendzy/modeles/images_modele.dart';
 
