@@ -8,6 +8,16 @@ class TailleDuText {
         fontSize: s12px,
         fontWeight: PoidsDeLaPolice.normal,
       );
+  static TextStyle texte14Normal(Color color) => TextStyle(
+        color: color,
+        fontSize: s14px,
+        fontWeight: PoidsDeLaPolice.normal,
+      );
+  static TextStyle texte14DemiGras(Color color) => TextStyle(
+        color: color,
+        fontSize: s14px,
+        fontWeight: PoidsDeLaPolice.demiGras,
+      );
 
   static TextStyle texte16Normal(Color color) => TextStyle(
         color: color,
