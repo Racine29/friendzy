@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:friendzy/modeles/centre_dinteret_model.dart';
+import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
+import 'package:friendzy/modeles/centre_dinteret_modele.dart';
+import 'package:friendzy/services/service_dauthentification.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
+import "package:provider/provider.dart";
 
 class CentreDinteret extends StatefulWidget {
   const CentreDinteret({super.key});
@@ -13,25 +16,30 @@ class CentreDinteret extends StatefulWidget {
 }
 
 class _CentreDinteretState extends State<CentreDinteret> {
-  List<CentreDinteretModel> centredinterets = [
-    CentreDinteretModel(
-        image: "assets/images/emoji-ballon.png", nom: "Football"),
-    CentreDinteretModel(image: "assets/images/emoji-danse.png", nom: "Dancing"),
-    CentreDinteretModel(
-        image: "assets/images/emoji-ecriture.png", nom: "Writing"),
-    CentreDinteretModel(
-        image: "assets/images/emoji-fashon.png", nom: "Fashion"),
-    CentreDinteretModel(image: "assets/images/emoji-gens.png", nom: "People"),
-    CentreDinteretModel(image: "assets/images/emoji-jeu.png", nom: "Gaming"),
-    CentreDinteretModel(image: "assets/images/emoji-music.png", nom: "Music"),
-    CentreDinteretModel(image: "assets/images/emoji-photo.png", nom: "Gallery"),
-  ];
+  List<CentreDinteretModel> centredinterets = [];
 
-  List<CentreDinteretModel> interetsSelectionner = [];
+  final service = ServicesDauthentifications();
+
+  recupererTousLesCentresDinterets() async {
+    final donnees = await service.tousLesCentresDinterets();
+    if (donnees.isNotEmpty) {
+      centredinterets = donnees;
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    recupererTousLesCentresDinterets();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final fournisseur = Provider.of<UtilisateurFournisseur>(context);
+
     return Column(
-      // mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(
           height: h10px,
@@ -44,25 +52,35 @@ class _CentreDinteretState extends State<CentreDinteret> {
         SizedBox(
           height: h30px,
         ),
-        Wrap(
-          spacing: 20,
-          runSpacing: 20,
-          children: centredinterets
-              .map((e) => GestureDetector(
+        centredinterets.isEmpty
+            ? SizedBox(
+                height: h100px,
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: couleurPrincipal,
+                  ),
+                ),
+              )
+            : Wrap(
+                spacing: 6,
+                runSpacing: 14,
+                children: centredinterets.map((e) {
+                  final monCentreDinteret = fournisseur.centreDinterets
+                      .where((element) => element.nom == e.nom);
+                  return GestureDetector(
                     onTap: () {
-                      setState(() {
-                        if (interetsSelectionner.contains(e)) {
-                          interetsSelectionner.remove(e);
-                        } else {
-                          interetsSelectionner.add(e);
-                        }
-                      });
+                      if (monCentreDinteret.isNotEmpty) {
+                        fournisseur
+                            .supprimerUnCentreDinteret(monCentreDinteret.first);
+                      } else {
+                        fournisseur.ajoutDeCentreDinteret(e);
+                      }
                     },
                     child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: h12px, vertical: h10px),
+                            horizontal: h8px, vertical: h10px),
                         decoration: BoxDecoration(
-                          color: interetsSelectionner.contains(e)
+                          color: monCentreDinteret.isNotEmpty
                               ? couleurSecondaire
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(100),
@@ -73,7 +91,7 @@ class _CentreDinteretState extends State<CentreDinteret> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.asset(
+                            Image.network(
                               e.image,
                               height: h16px,
                             ),
@@ -83,15 +101,15 @@ class _CentreDinteretState extends State<CentreDinteret> {
                             Text(
                               e.nom,
                               style: TailleDuText.texte16Normal(
-                                  interetsSelectionner.contains(e)
+                                  monCentreDinteret.isNotEmpty
                                       ? texteCouleurBlanc
                                       : texteCouleurNoir),
                             )
                           ],
                         )),
-                  ))
-              .toList(),
-        ),
+                  );
+                }).toList(),
+              ),
       ],
     );
   }
