@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:friendzy/modeles/centre_dinteret_modele.dart';
 import 'package:friendzy/modeles/images_modele.dart';
 import 'package:friendzy/modeles/utilisateur_modele.dart';
-import 'package:friendzy/services/service_dauthentification.dart';
 import 'package:get_storage/get_storage.dart';
 
 class UtilisateurFournisseur extends ChangeNotifier {
