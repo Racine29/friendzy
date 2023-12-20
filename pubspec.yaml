@@ -45,6 +45,15 @@ dependencies:
   firebase_auth: ^4.15.0
   cloud_firestore: ^4.13.3
   provider: ^6.1.1
+  image_picker: ^1.0.4
+  flutter_image_compress: ^2.1.0
+  image_cropper: ^5.0.1
+  simple_circular_progress_bar: ^1.0.2
+  google_sign_in: ^6.1.6
+  get_storage: ^2.1.1
+  cached_network_image: ^3.3.0
+  internet_connection_checker: ^1.0.0+1
+  fluttertoast: ^8.2.4
 
 flutter_native_splash:
   background_image: "assets/images/ecranDaffichageFondDecran.png"
@@ -86,6 +95,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/histoires/
+    - assets/correspondances/
+    - assets/paysages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
