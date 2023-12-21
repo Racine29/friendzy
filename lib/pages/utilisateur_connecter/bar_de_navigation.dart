@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:friendzy/pages/utilisateur_connecter/accueil.dart';
 import 'package:friendzy/pages/utilisateur_connecter/affinite.dart';
+import 'package:friendzy/pages/utilisateur_connecter/compte/compte_accueil.dart';
 import 'package:friendzy/pages/utilisateur_connecter/decouverte.dart';
 import 'package:friendzy/pages/utilisateur_connecter/message.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
@@ -21,8 +22,8 @@ class _BarDeNavigationState extends State<BarDeNavigation> {
     Accueil(),
     Decouverte(),
     Container(),
-    Affiniter(),
     Message(),
+    CompteAccueil(),
   ];
   int index = 0;
 
