@@ -8,6 +8,11 @@ class TailleDuText {
         fontSize: s12px,
         fontWeight: PoidsDeLaPolice.normal,
       );
+  static TextStyle texte12DemiGras(Color color) => TextStyle(
+        color: color,
+        fontSize: s12px,
+        fontWeight: PoidsDeLaPolice.demiGras,
+      );
   static TextStyle texte14Normal(Color color) => TextStyle(
         color: color,
         fontSize: s14px,
@@ -46,6 +51,11 @@ class TailleDuText {
         fontWeight: PoidsDeLaPolice.gras,
       );
 
+  static TextStyle texte24Normal(Color color) => TextStyle(
+        color: color,
+        fontSize: s24px,
+        fontWeight: PoidsDeLaPolice.normal,
+      );
   static TextStyle texte24DemiGras(Color color) => TextStyle(
         color: color,
         fontSize: s24px,
@@ -61,6 +71,11 @@ class TailleDuText {
         color: color,
         fontSize: s28px,
         fontWeight: PoidsDeLaPolice.gras,
+      );
+  static TextStyle texte32DemiGras(Color color) => TextStyle(
+        color: color,
+        fontSize: s32px,
+        fontWeight: PoidsDeLaPolice.demiGras,
       );
   static TextStyle texte32Gras(Color color) => TextStyle(
         color: color,
