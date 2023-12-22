@@ -9,6 +9,7 @@ class UtilisateurFournisseur extends ChangeNotifier {
   List<CentreDinteretModel> centreDinterets = [];
   List<Images> maListeDimages = [];
   final stockage = GetStorage();
+  int indicateurDeProgression = 0;
   UtilisateurFournisseur() {
     if (stockage.read("utilisateur") != null) {
       final utilisateur = UtilisateurModel.deJSON(stockage.read("utilisateur"));
@@ -19,7 +20,11 @@ class UtilisateurFournisseur extends ChangeNotifier {
 
   completerLesDonnees(Map<String, dynamic> utilisateur) {
     donnees.addAll(utilisateur);
+    notifyListeners();
+  }
 
+  indicateurMiseAJour(int index) {
+    indicateurDeProgression = index;
     notifyListeners();
   }
 

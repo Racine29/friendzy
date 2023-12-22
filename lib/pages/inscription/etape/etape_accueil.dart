@@ -53,9 +53,12 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
         genre: fournisseur.donnees["genre"],
         numeroDeTelephone: fournisseur.donnees["numeroDeTelephone"],
         centreDinterets: fournisseur.centreDinterets,
+        indicateurDeProgression: fournisseur.indicateurDeProgression,
       );
       await serviceDauthentification
           .enregistrerUnUtilisateur(infoDeMonUtilisateur1);
+      fournisseur.completerLesDonnees(infoDeMonUtilisateur1.aMap());
+
       await stockage.write("utilisateur", infoDeMonUtilisateur1.aMap());
     } else {
       // connexion via google
@@ -73,10 +76,12 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
         genre: fournisseur.donnees["genre"],
         email: connexionViaGoogle.user?.email,
         centreDinterets: fournisseur.centreDinterets,
+        indicateurDeProgression: fournisseur.indicateurDeProgression,
       );
       await serviceDauthentification
           .enregistrerUnUtilisateur(infoDeMonUtilisateur2);
       print("je sui de ja ici -----------------------");
+      fournisseur.completerLesDonnees(infoDeMonUtilisateur2.aMap());
       await stockage.write("utilisateur", infoDeMonUtilisateur2.aMap());
     }
   }
@@ -102,12 +107,12 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
     ModalRoute? parametres = ModalRoute.of(context);
     final fournisseur =
         Provider.of<UtilisateurFournisseur>(context, listen: true);
-
     return Scaffold(
       appBar: BarreDapplication(
         onPressed: () {
           if (index > 0) {
             index--;
+            fournisseur.indicateurMiseAJour(index);
           } else if (index == 0) {
             Navigator.of(context).pop();
           }
@@ -121,7 +126,7 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ecrans[index],
-              Spacer(),
+              const Spacer(),
               Column(
                 children: [
                   if (index != (ecrans.length - 1))
@@ -133,6 +138,7 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
                           setState(() {
                             index++;
                           });
+                          fournisseur.indicateurMiseAJour(index);
                         },
                         enregistrerLesDonnees: () async {
                           final serviceDauthentification =
@@ -154,7 +160,6 @@ class _EtapeAccueilState extends State<EtapeAccueil> {
                                 "centreDinterets": mesCentreDinterets,
                               },
                             );
-                            // print(fournisseur.donnees["centreDinterets"]);
                             await serviceDauthentification
                                 .miseAJourDesInformationsDeMonUtilisateur(
                                     UtilisateurModel.deJSON(

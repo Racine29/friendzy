@@ -187,6 +187,7 @@ class _EntrerPhotoState extends State<EntrerPhoto> {
 
                     UtilisateurModel utilisateur =
                         UtilisateurModel.deJSON(fournisseur.donnees);
+
                     for (var i = 0; i < images.length; i++) {
                       final image = images[i];
                       final url =
@@ -200,11 +201,9 @@ class _EntrerPhotoState extends State<EntrerPhoto> {
                       }
                     }
 
-                    print(
-                        "mon imageduprofil ${utilisateur.imageDuProfil} ---------------------------------");
                     utilisateur.images = fournisseur.maListeDimages;
-                    print(
-                        "mon images ${utilisateur.images} ---------------------------------");
+                    utilisateur.indicateurDeProgression = 4;
+
                     final approuver = await serviceDauthentification
                         .miseAJourDesInformationsDeMonUtilisateur(utilisateur);
                     if (approuver == true) {
@@ -213,7 +212,7 @@ class _EntrerPhotoState extends State<EntrerPhoto> {
                           ?.updateDisplayName(utilisateur.nom);
                       await GetStorage().remove("utilisateur");
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          EcranEmballage.page, (route) => true);
+                          EcranEmballage.page, (route) => false);
                     }
                   },
             texte: "Next",
