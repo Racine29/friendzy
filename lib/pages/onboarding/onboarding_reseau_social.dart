@@ -86,6 +86,7 @@ class OnboardingReseauSocial extends StatelessWidget {
 
                           await service.authentification
                               .signInWithCredential(credentiel!);
+                          Navigator.pop(context);
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               EcranEmballage.page, (route) => false);
                         }

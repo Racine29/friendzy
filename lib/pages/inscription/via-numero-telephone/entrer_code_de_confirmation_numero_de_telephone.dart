@@ -192,22 +192,12 @@ class _EntrerConfirmationDeCodeDuNumeroDeTelephone
                                   context, EtapeAccueil.page);
                             } else {
                               // Si lutilisateur n'existe pas l'enregitrer
-                              UtilisateurModel utilisateur =
-                                  UtilisateurModel.deJSON(snapshot.docs.first
-                                      .data() as Map<String, dynamic>);
 
-                              // Si il existe aller sur la page d'accueil
-                              if (utilisateur.nom != null) {
-                                await authentification.authentification
-                                    .signInWithCredential(credentiel);
-                                
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                EcranEmballage.page, (route) => true);
-                              }
-                              if (utilisateur.nom == null) {
-                                Navigator.popAndPushNamed(
-                                    context, EtapeAccueil.page);
-                              }
+                              await authentification.authentification
+                                  .signInWithCredential(credentiel);
+                              Navigator.of(context);
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  EcranEmballage.page, (route) => true);
                             }
                           });
                         } on FirebaseAuthException catch (e) {
