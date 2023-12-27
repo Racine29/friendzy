@@ -15,9 +15,11 @@ import 'package:friendzy/pages/onboarding/onboarding_reseau_social.dart';
 import 'package:friendzy/pages/utilisateur_connecter/accueil.dart';
 import 'package:friendzy/pages/inscription/etape/etape_accueil.dart';
 import 'package:friendzy/pages/utilisateur_connecter/bar_de_navigation.dart';
+import 'package:friendzy/pages/utilisateur_connecter/compte/modification_du_profile.dart';
 import 'package:sizer/sizer.dart';
 import "package:provider/provider.dart";
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,11 +45,23 @@ class MyApp extends StatelessWidget {
         return Sizer(builder: (context, _, __) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('fr', 'FR'),
+              Locale('en', 'US'),
+              Locale('es', 'ES'),
+              Locale('pt', 'BR'),
+            ],
             theme: ThemeData(fontFamily: "Hellix"),
             initialRoute: EcranEmballage.page,
             builder: FToastBuilder(),
             navigatorKey: navigatorKey,
             routes: {
+              // ModificationDuProfile.page: (context) => ModificationDuProfile(),
               BarDeNavigation.page: (context) => BarDeNavigation(),
               Onboarding.page: (context) => Onboarding(),
               EcranEmballage.page: (context) => EcranEmballage(),
