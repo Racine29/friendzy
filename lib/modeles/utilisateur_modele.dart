@@ -2,19 +2,20 @@ import 'package:friendzy/modeles/centre_dinteret_modele.dart';
 import 'package:friendzy/modeles/images_modele.dart';
 
 class UtilisateurModel {
-  final String? nom;
-  final String? id;
-  final String? email;
-  final String? numeroDeTelephone;
-  final String? aPropos;
-  final DateTime? dateDeNaissance;
-  final String? photographie;
-  final String? music;
-  final String? geolocalisation;
-  List<Images>? images;
+  String? nom;
+  String? id;
+  String? email;
+  int? age;
+  String? numeroDeTelephone;
+  String? aPropos;
+  String? dateDeNaissance;
+  String? photographie;
+  String? music;
+  String? geolocalisation;
+  List<Images> images;
   String? imageDuProfil;
   List<CentreDinteretModel>? centreDinterets;
-  final String? genre;
+  String? genre;
   int indicateurDeProgression;
   UtilisateurModel({
     this.aPropos,
@@ -26,12 +27,13 @@ class UtilisateurModel {
     this.nom,
     this.email,
     this.numeroDeTelephone,
-    this.images,
+    List<Images>? images,
     this.centreDinterets,
     this.genre,
+    this.age,
     this.imageDuProfil,
     this.indicateurDeProgression = 0,
-  });
+  }) : images = images ?? [];
 
   factory UtilisateurModel.deJSON(Map<String, dynamic> json) {
     return UtilisateurModel(
@@ -39,6 +41,7 @@ class UtilisateurModel {
       nom: json["nom"],
       email: json["email"],
       genre: json["genre"],
+      age: json["age"],
       dateDeNaissance: json["dateDeNaissance"],
       music: json["music"],
       aPropos: json["aPropos"],
@@ -48,7 +51,7 @@ class UtilisateurModel {
       numeroDeTelephone: json["numeroDeTelephone"],
       indicateurDeProgression: json["indicateurDeProgression"],
       images: json["images"] == null
-          ? null
+          ? []
           : (json["images"] as List)
               .map((e) => Images.deJSON(e as Map<String, dynamic>))
               .toList(),
@@ -63,6 +66,7 @@ class UtilisateurModel {
       "nom": nom,
       "email": email,
       "genre": genre,
+      "age": age,
       "music": music,
       "geolocalisation": geolocalisation,
       "aPropos": aPropos,
@@ -74,7 +78,7 @@ class UtilisateurModel {
       "centreDinterets": centreDinterets == null
           ? null
           : centreDinterets!.map((e) => e.aMap()).toList(),
-      "images": images == null ? null : images!.map((e) => e.aMap()).toList(),
+      "images": images.isEmpty ? null : images.map((e) => e.aMap()).toList(),
     };
   }
 }
