@@ -6,11 +6,12 @@ import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
 import "package:provider/provider.dart";
+import "package:cached_network_image/cached_network_image.dart";
 
 class CentreDinteret extends StatefulWidget {
-  const CentreDinteret({super.key});
+  const CentreDinteret({super.key, this.modifierMonCompte = false});
   static String page = "entrer-centre-interet";
-
+  final bool modifierMonCompte;
   @override
   State<CentreDinteret> createState() => _CentreDinteretState();
 }
@@ -32,6 +33,15 @@ class _CentreDinteretState extends State<CentreDinteret> {
   void initState() {
     super.initState();
     recupererTousLesCentresDinterets();
+  }
+
+  ajoutEtSuppressionDeMonCentreDinteret(UtilisateurFournisseur fournisseur,
+      Iterable<CentreDinteretModel> monCentreDinteret, CentreDinteretModel e) {
+    if (monCentreDinteret.isNotEmpty) {
+      fournisseur.supprimerUnCentreDinteret(monCentreDinteret.first);
+    } else {
+      fournisseur.ajoutDeCentreDinteret(e);
+    }
   }
 
   @override
@@ -69,11 +79,16 @@ class _CentreDinteretState extends State<CentreDinteret> {
                       .where((element) => element.nom == e.nom);
                   return GestureDetector(
                     onTap: () {
-                      if (monCentreDinteret.isNotEmpty) {
-                        fournisseur
-                            .supprimerUnCentreDinteret(monCentreDinteret.first);
+                      if (!widget.modifierMonCompte) {
+                        ajoutEtSuppressionDeMonCentreDinteret(
+                            fournisseur, monCentreDinteret, e);
                       } else {
-                        fournisseur.ajoutDeCentreDinteret(e);
+                        if (fournisseur.centreDinterets.length > 5) {
+                          ajoutEtSuppressionDeMonCentreDinteret(
+                              fournisseur, monCentreDinteret, e);
+                        } else {
+                          fournisseur.ajoutDeCentreDinteret(e);
+                        }
                       }
                     },
                     child: Container(
@@ -91,8 +106,8 @@ class _CentreDinteretState extends State<CentreDinteret> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.network(
-                              e.image,
+                            CachedNetworkImage(
+                              imageUrl: e.image,
                               height: h16px,
                             ),
                             SizedBox(
