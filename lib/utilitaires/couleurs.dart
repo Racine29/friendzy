@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 const Color couleurPrincipal = Color(0xff4B164C);
 const Color couleurSecondaire = Color(0xffDF8FD2);
 const Color couleurTertiaire = Color(0xffFEEFF7);
+const Color couleurGris50 = Color(0xffF9FAFB);
+const Color couleurGris70 = Color(0xffF8F8F8);
 const Color couleurGris400 = Color(0xff9EA3AE);
 const Color couleurGris500 = Color(0xff6C727F);
 const Color couleurGris600 = Color(0xff4D5461);
