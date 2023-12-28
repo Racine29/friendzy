@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
@@ -16,23 +17,66 @@ class PhotoCarte extends StatelessWidget {
     required this.tailleDeMonEmoji,
     required this.hauteurDuButton,
     this.surClique,
-    this.photoExiste = false,
     this.fichier,
     this.changerTexteDuButton = false,
+    this.imageUrl,
   });
   final Size taille;
   final double largeur;
   final double hauteur;
   final double tailleDeMonEmoji;
   final double hauteurDuButton;
-  final bool photoExiste;
   final VoidCallback? surClique;
   final XFile? fichier;
+  final String? imageUrl;
   final bool changerTexteDuButton;
+
+  ombreSurMaPhoto() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(h20px),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.grey.withOpacity(0.1),
+            Colors.black.withOpacity(.6),
+          ],
+        ),
+      ),
+    );
+  }
+
+  double changerLaTailleDeMonButton() {
+    if (fichier != null && changerTexteDuButton ||
+        imageUrl != null && changerTexteDuButton) {
+      return h100px + 50;
+    }
+
+    return h80px;
+  }
+
+  Color changerCouleurDuButton() {
+    if (fichier != null && changerTexteDuButton ||
+        imageUrl != null && changerTexteDuButton) {
+      return Colors.white.withOpacity(.3);
+    }
+
+    return couleurSecondaire;
+  }
+
+  String changerLeTexteDuButton() {
+    if (fichier != null && changerTexteDuButton ||
+        imageUrl != null && changerTexteDuButton) {
+      return "Change Photo";
+    }
+
+    return "Add";
+  }
+
   @override
   Widget build(BuildContext context) {
-    double largeurDeMonButton =
-        fichier != null && changerTexteDuButton ? h100px + 50 : h80px;
+    double largeurDeMonButton = changerLaTailleDeMonButton();
     return Container(
       width: largeur,
       height: hauteur,
@@ -52,28 +96,25 @@ class PhotoCarte extends StatelessWidget {
               color: couleurSecondaire.withOpacity(.1),
             ),
           ),
-          fichier != null
-              ? Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(h20px),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.2),
-                        Colors.black.withOpacity(.4),
-                      ],
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(h20px),
-                    child: Image.file(
-                      File(fichier!.path),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                )
-              : const SizedBox(),
+          if (imageUrl != null) ...{
+            ClipRRect(
+                borderRadius: BorderRadius.circular(h20px),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl!,
+                  fit: BoxFit.cover,
+                )),
+            ombreSurMaPhoto(),
+          },
+          if (fichier != null) ...{
+            ClipRRect(
+              borderRadius: BorderRadius.circular(h20px),
+              child: Image.file(
+                File(fichier!.path),
+                fit: BoxFit.cover,
+              ),
+            ),
+            ombreSurMaPhoto(),
+          },
           Positioned(
             left: (largeur / 2) - (largeurDeMonButton / 2),
             bottom: h10px,
@@ -81,16 +122,14 @@ class PhotoCarte extends StatelessWidget {
             height: hauteurDuButton,
             child: ElevatedBtn(
               onPressed: surClique,
-              couleurDubutton: fichier != null && changerTexteDuButton
-                  ? Colors.white.withOpacity(.3)
-                  : couleurSecondaire,
+              couleurDubutton: changerCouleurDuButton(),
               rembourage: EdgeInsets.zero,
               style: TailleDuText.texte16Normal(texteCouleurBlanc),
               enfant: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Icon(
-                    fichier != null
+                    fichier != null || imageUrl != null && changerTexteDuButton
                         ? Icons.camera_alt_rounded
                         : Icons.add_rounded,
                     size: h16px,
@@ -100,9 +139,7 @@ class PhotoCarte extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    fichier != null && changerTexteDuButton
-                        ? "Change Photo"
-                        : "Add",
+                    changerLeTexteDuButton(),
                     style: TailleDuText.texte16DemiGras(texteCouleurBlanc),
                   )
                 ],
