@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
 import 'package:friendzy/modeles/utilisateur_modele.dart';
+import 'package:friendzy/pages/utilisateur_connecter/compte/modification_du_profile.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -127,18 +128,17 @@ class _CompteAccueilState extends State<CompteAccueil> {
 
                 //? Nom, age et geolocalisation du profile ----------------------------
                 SizedBox(
-                  height: h16px,
+                  height: h10px,
                 ),
                 Text(
-                  utilisateur.nom ?? "",
+                  "${utilisateur.nom != null && utilisateur.nom!.length < 10 ? utilisateur.nom : utilisateur.nom!.substring(0, 10)},${utilisateur.age ?? ""}" ??
+                      "",
                   style: TailleDuText.texte32DemiGras(texteCouleurNoir),
                 ),
-                SizedBox(
-                  height: h8px,
-                ),
+
                 Text(
-                  utilisateur.geolocalisation ?? "",
-                  style: TailleDuText.texte24Normal(
+                  utilisateur.geolocalisation ?? "FLORIDA,US",
+                  style: TailleDuText.texte21Normal(
                       texteCouleurNoir.withOpacity(.5)),
                 ),
                 //  Fin ---------------------------------------
@@ -212,7 +212,17 @@ class _CompteAccueilState extends State<CompteAccueil> {
                         texte: "Edit Profile",
                         rembourage: EdgeInsets.symmetric(
                             horizontal: h14px, vertical: h8px),
-                        onPressed: () {},
+                        onPressed: () async {
+                          await Future.delayed(
+                              const Duration(milliseconds: 200));
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (context) => ModificationDuProfile(
+                                utilisateur: utilisateur,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -232,7 +242,7 @@ class _CompteAccueilState extends State<CompteAccueil> {
                 SizedBox(
                   height: h60px,
                   child: ElevatedBtn(
-                      onPressed: () {},
+                      onPressed: () async {},
                       couleurDubutton: Colors.white,
                       couleurDombreDuButton: Colors.transparent,
                       rondeur: BorderRadius.circular(h16px),
