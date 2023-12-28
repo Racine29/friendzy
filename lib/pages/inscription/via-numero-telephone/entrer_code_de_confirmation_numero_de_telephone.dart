@@ -195,7 +195,7 @@ class _EntrerConfirmationDeCodeDuNumeroDeTelephone
 
                               await authentification.authentification
                                   .signInWithCredential(credentiel);
-                              Navigator.of(context);
+                              Navigator.of(context).pop();
                               Navigator.of(context).pushNamedAndRemoveUntil(
                                   EcranEmballage.page, (route) => true);
                             }
