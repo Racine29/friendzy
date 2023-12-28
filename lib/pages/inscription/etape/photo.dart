@@ -19,8 +19,12 @@ import 'package:provider/provider.dart';
 import '../../../utilitaires/couleurs.dart';
 
 class EntrerPhoto extends StatefulWidget {
-  EntrerPhoto({super.key});
+  const EntrerPhoto({
+    super.key,
+    this.voirElement = true,
+  });
   static String page = "entrer-photo";
+  final bool voirElement;
 
   @override
   State<EntrerPhoto> createState() => _EntrerPhotoState();
@@ -46,14 +50,16 @@ class _EntrerPhotoState extends State<EntrerPhoto> {
         SizedBox(
           height: h10px,
         ),
-        Text(
-          "Upload your photos",
-          textAlign: TextAlign.center,
-          style: TailleDuText.texte24Gras(texteCouleurNoir),
-        ),
-        SizedBox(
-          height: h30px,
-        ),
+        if (widget.voirElement) ...{
+          Text(
+            "Upload your photos",
+            textAlign: TextAlign.center,
+            style: TailleDuText.texte24Gras(texteCouleurNoir),
+          ),
+          SizedBox(
+            height: h30px,
+          ),
+        },
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,7 +69,6 @@ class _EntrerPhotoState extends State<EntrerPhoto> {
               largeur: taille.width * .5,
               hauteur: taille.height * .28,
               hauteurDuButton: h30px,
-              photoExiste: false,
               fichier: imagePrincipal,
               changerTexteDuButton: true,
               surClique: () async {
@@ -175,50 +180,52 @@ class _EntrerPhotoState extends State<EntrerPhoto> {
           ],
         ),
         SizedBox(height: h40px),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedBtn(
-            onPressed: imagePrincipal == null
-                ? null
-                : () async {
-                    final serviceDauthentification =
-                        ServicesDauthentifications();
-                    Chargement(context);
+        if (widget.voirElement)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedBtn(
+              onPressed: imagePrincipal == null
+                  ? null
+                  : () async {
+                      final serviceDauthentification =
+                          ServicesDauthentifications();
+                      Chargement(context);
 
-                    UtilisateurModel utilisateur =
-                        UtilisateurModel.deJSON(fournisseur.donnees);
+                      UtilisateurModel utilisateur =
+                          UtilisateurModel.deJSON(fournisseur.donnees);
 
-                    for (var i = 0; i < images.length; i++) {
-                      final image = images[i];
-                      final url =
-                          await serviceDauthentification.telechargerUneImage(
-                              File(image.fichier!.path), "photo");
-                      if (image.nom == "imageDuProfil") {
-                        utilisateur.imageDuProfil = url;
-                      } else {
-                        fournisseur.ajoutDeMaListeDimages(
-                            Images(nom: image.nom, url: url));
+                      for (var i = 0; i < images.length; i++) {
+                        final image = images[i];
+                        final url =
+                            await serviceDauthentification.telechargerUneImage(
+                                File(image.fichier!.path), "photo");
+                        if (image.nom == "imageDuProfil") {
+                          utilisateur.imageDuProfil = url;
+                        } else {
+                          fournisseur.ajoutDeMaListeDimages(
+                              Images(nom: image.nom, url: url));
+                        }
                       }
-                    }
 
-                    utilisateur.images = fournisseur.maListeDimages;
-                    utilisateur.indicateurDeProgression = 4;
+                      utilisateur.images = fournisseur.maListeDimages;
+                      utilisateur.indicateurDeProgression = 4;
 
-                    final approuver = await serviceDauthentification
-                        .miseAJourDesInformationsDeMonUtilisateur(utilisateur);
-                    if (approuver == true) {
-                      await serviceDauthentification
-                          .authentification.currentUser
-                          ?.updateDisplayName(utilisateur.nom);
-                      await GetStorage().remove("utilisateur");
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          EcranEmballage.page, (route) => false);
-                    }
-                  },
-            texte: "Next",
-            style: TailleDuText.texte16Gras(texteCouleurBlanc),
+                      final approuver = await serviceDauthentification
+                          .miseAJourDesInformationsDeMonUtilisateur(
+                              utilisateur);
+                      if (approuver == true) {
+                        await serviceDauthentification
+                            .authentification.currentUser
+                            ?.updateDisplayName(utilisateur.nom);
+                        await GetStorage().remove("utilisateur");
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            EcranEmballage.page, (route) => false);
+                      }
+                    },
+              texte: "Next",
+              style: TailleDuText.texte16Gras(texteCouleurBlanc),
+            ),
           ),
-        ),
       ],
     );
   }
