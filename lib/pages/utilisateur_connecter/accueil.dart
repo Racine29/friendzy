@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:friendzy/fournisseurs/utilisateur_fournisseur.dart';
 import 'package:friendzy/modeles/poste_modele.dart';
 import 'package:friendzy/services/service_dauthentification.dart';
 import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 import 'package:friendzy/utilitaires/taille_des_textes.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
 class Accueil extends StatefulWidget {
   Accueil({super.key});
@@ -70,6 +73,13 @@ class _AccueilState extends State<Accueil> {
               ),
               child: InkWell(
                 onTap: () async {
+                  final fournisseur = Provider.of<UtilisateurFournisseur>(
+                      context,
+                      listen: false);
+
+                  fournisseur.centreDinterets.clear();
+                  fournisseur.donnees.clear();
+                  await GoogleSignIn().signOut();
                   await ServicesDauthentifications().authentification.signOut();
                 },
                 borderRadius: BorderRadius.circular(h100px),
