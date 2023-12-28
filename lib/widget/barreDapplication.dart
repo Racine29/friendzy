@@ -3,14 +3,24 @@ import 'package:friendzy/utilitaires/couleurs.dart';
 import 'package:friendzy/utilitaires/taille_des_polices.dart';
 
 class BarreDapplication extends StatelessWidget implements PreferredSizeWidget {
-  const BarreDapplication({super.key, this.onPressed});
+  const BarreDapplication(
+      {super.key,
+      this.onPressed,
+      this.titre,
+      this.centrerLeTitre,
+      this.couleurArriereFond});
   final VoidCallback? onPressed;
+  final Widget? titre;
+  final bool? centrerLeTitre;
+  final Color? couleurArriereFond;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
       leadingWidth: 80,
       toolbarHeight: 70,
+      title: titre,
+      centerTitle: centrerLeTitre,
       leading: Center(
         child: SizedBox(
           width: h40px,
@@ -29,7 +39,7 @@ class BarreDapplication extends StatelessWidget implements PreferredSizeWidget {
               )),
         ),
       ),
-      backgroundColor: couleurArrierePlan,
+      backgroundColor: couleurArriereFond ?? couleurArrierePlan,
     );
   }
 
